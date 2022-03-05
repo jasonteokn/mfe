@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin') // Take some HTML files and inject some script tag in
+
 module.exports = {
   module: {
     rules: [
@@ -13,5 +15,10 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    }),
+  ],
 }
