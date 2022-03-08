@@ -7,7 +7,7 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/container/latest/' // to redirect public path for cloud
+    publicPath: '/marketing/latest/' // to redirect public path for cloud
   },
   plugins: [
     new ModuleFederationPlugin({
