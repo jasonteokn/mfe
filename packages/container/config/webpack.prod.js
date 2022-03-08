@@ -8,7 +8,8 @@ const domain = process.env.PRODUCTION_DOMAIN // String that store the location o
 const prodConfig = {
   mode: 'production',
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/container/latest/' // to redirect public path for cloud
   },
   plugins: [
     new ModuleFederationPlugin({
