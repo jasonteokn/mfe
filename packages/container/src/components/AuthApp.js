@@ -1,8 +1,8 @@
-import { mount } from "marketing/MarketingApp";
+import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ onSignIn }) => {
   const ref = useRef(null);
   const history = useHistory(); // Copy of browser history
 
@@ -15,8 +15,8 @@ export default () => {
         if (pathname !== nextPathname) { // Only when paths are different from container and child apps
           history.push(nextPathname); // Navigate to new path
         }
-        
       },
+      onSignIn
     });
 
     history.listen(onParentNavigate)

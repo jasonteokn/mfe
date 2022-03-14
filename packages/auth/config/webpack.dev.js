@@ -1,4 +1,5 @@
 const { merge } = require('webpack-merge') // Function to merge 2 different webpack config object
+const HtmlWebpackPlugin = require('html-webpack-plugin') // Take some HTML files and inject some script tag in
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 const commonConfig = require('./webpack.common')
 const packageJson = require('../package.json')
@@ -6,21 +7,24 @@ const packageJson = require('../package.json')
 const devConfig = {
   mode: 'development',
   output: {
-    publicPath: 'http://localhost:8080/',
+    publicPath: 'http://localhost:8082/',
   },
   devServer: {
-    port: 8080,
+    port: 8082,
     historyApiFallback: true
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'container', //not strictly required
-      remotes: {
-        marketing: 'marketing@http://localhost:8081/remoteEntry.js',
-        auth: 'auth@http://localhost:8082/remoteEntry.js'
+      name: 'auth',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './AuthApp': './src/bootstrap'
       },
-      // shared: ['react', 'react-dom'],
       shared: packageJson.dependencies,
+      // shared: ['react', 'react-dom'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
     })
   ]
 } 
