@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Router } from "react-router-dom";
 import {
   StylesProvider,
@@ -13,6 +13,9 @@ const generateClassname = createGenerateClassName({
 });
 
 export default ({ history, onSignIn }) => {
+  useEffect(() => {
+    console.log(onSignIn);
+  }, [onSignIn]);
   return (
     <div>
       {/* StylesProvider is used to customise CSS and JS generation stuff */}

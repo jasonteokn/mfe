@@ -9,17 +9,20 @@ export default () => {
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
       initialPath: history.location.pathname,
-      onNavigate: ({ pathname: nextPathname }) => { // Pathname is renamed
-        const { pathname } = history.location
+      onNavigate: ({ pathname: nextPathname }) => {
+        // Marketing navigation passed back to container
+        // Pathname is renamed
+        console.log(nextPathname);
+        const { pathname } = history.location;
 
-        if (pathname !== nextPathname) { // Only when paths are different from container and child apps
+        if (pathname !== nextPathname) {
+          // Only when paths are different from container(pathname) and child(nextPathname) apps
           history.push(nextPathname); // Navigate to new path
         }
-        
       },
     });
 
-    history.listen(onParentNavigate)
+    history.listen(onParentNavigate); // Container navigatation passed to child
   }, []);
 
   return <div ref={ref} />;
